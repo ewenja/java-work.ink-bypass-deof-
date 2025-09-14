@@ -1,0 +1,483 @@
+(() => {
+    const _0x153c53 = window.setTimeout;
+    const _0x2a589f = window.setInterval;
+    const _0x5783b8 = window.open;
+    window.setTimeout = (_0x5bf039, _0x450aeb) => {
+        if (_0x450aeb > 0) {
+            _0x450aeb = 1;
+        }
+        return _0x153c53(_0x5bf039, _0x450aeb);
+    };
+    window.setInterval = (_0x1484db, _0x37ec6d) => {
+        if (_0x37ec6d > 0) {
+            _0x37ec6d = 1;
+        }
+        return _0x2a589f(_0x1484db, _0x37ec6d);
+    };
+    let _0x4d6f61 = 0;
+    let _0x5c9ec9 = false;
+
+    function _0x8b1d3() {
+        try {
+            _0x19c5cb.style.opacity = '0';
+            _0x641784.style.opacity = '0';
+            clearInterval(_0x400a8f);
+            _0x153c53(() => {
+                if (_0x19c5cb && _0x19c5cb.parentNode) {
+                    _0x19c5cb.parentNode.removeChild(_0x19c5cb);
+                }
+                if (_0x641784 && _0x641784.parentNode) {
+                    _0x641784.parentNode.removeChild(_0x641784);
+                }
+            }, 500);
+        } catch (_0x200521) {}
+        _0x5c9ec9 = true;
+        try {
+            window.open = _0x5783b8;
+        } catch (_0xf23d5f) {}
+    }
+
+    function _0x455128(_0x1fe5e1) {
+        const _0x2f9546 = window.open;
+        try {
+            window.open = () => {};
+        } catch (_0x4c3e92) {
+            console.warn("Could not override window.open", _0x4c3e92);
+        }
+        const _0x28ac40 = Array.from(document.querySelectorAll(".stepcont.svelte-ck84f7 *"));
+        let _0x5a826d = 0;
+
+        function _0x216886() {
+            if (_0x5c9ec9) {
+                try {
+                    window.open = _0x2f9546;
+                } catch (_0x39cec8) {}
+                return;
+            }
+            if (_0x5a826d >= _0x28ac40.length) {
+                const _0x4321db = document.querySelector(".w-full.h-14.px-6.text-lg.font-semibold.rounded-full.transition-all.duration-200.flex.items-center.justify-center.space-x-3.bg-green-600.text-white.hover\\:bg-green-700.shadow-lg.hover\\:shadow-xl");
+                if (_0x4321db) {
+                    try {
+                        _0x4321db.click();
+                        console.log("Clicked green button after batch clicks");
+                    } catch (_0x902af) {
+                        console.warn("Error clicking green button", _0x902af);
+                    }
+                } else {
+                    console.warn("Green button not found after batch clicks");
+                }
+                const _0x1a0e66 = document.querySelector(".w-full.h-14.px-6.text-lg.font-semibold");
+                if (_0x1a0e66) {
+                    try {
+                        _0x1a0e66.click();
+                        console.log("Clicked #access-offers button after batch clicks");
+                    } catch (_0x2eaaf8) {
+                        console.warn("Error clicking #access-offers button", _0x2eaaf8);
+                    }
+                } else {
+                    console.warn("No button with id \"access-offers\" found");
+                }
+                try {
+                    window.open = _0x2f9546;
+                } catch (_0x5729f4) {}
+                console.log("✅ Done clicking all elements, popup blocking disabled.");
+                if (_0x1fe5e1) {
+                    _0x1fe5e1();
+                }
+                return;
+            }
+            const _0x27dbe0 = _0x28ac40[_0x5a826d];
+            try {
+                if (typeof _0x27dbe0.click === "function") {
+                    console.log("Clicking element (" + (_0x5a826d + 1) + '/' + _0x28ac40.length + '):', _0x27dbe0);
+                    _0x27dbe0.click();
+                }
+            } catch (_0x47e0c7) {
+                console.warn("Error clicking element", _0x47e0c7);
+            }
+            _0x5a826d++;
+            _0x153c53(_0x216886, 1);
+        }
+        _0x216886();
+    }
+
+    function _0x2e6e49(_0x4107db, _0xdfc047, _0x4acc83, _0x50fa8c = 10) {
+        let _0x1537bd = 0;
+
+        function _0x5b4d8e() {
+            if (_0x5c9ec9) {
+                return;
+            }
+            const _0x3e745e = document.querySelector(_0x4107db);
+            if (_0x3e745e) {
+                try {
+                    _0x3e745e.click();
+                    console.log("Clicked: " + _0x4107db);
+                } catch (_0x3c7e99) {
+                    console.warn("Error clicking " + _0x4107db, _0x3c7e99);
+                }
+                if (_0x4acc83) {
+                    _0x4acc83();
+                }
+            } else {
+                if (_0x4107db != "DO NOTHING") {
+                    _0x1537bd++;
+                    _0x4d6f61++;
+                    console.log("Not found: " + _0x4107db + ", retrying in " + _0xdfc047 + "ms (attempt " + _0x1537bd + ") - totalRetries=" + _0x4d6f61);
+                    if (_0x4d6f61 > 10) {
+                        _0x1b02e6.textContent = "Too many retries — please refresh or contact support.";
+                        console.warn("Exceeded total retry limit, stopping retries.");
+                        _0x641784.style.display = "block";
+                        _0x641784.style.opacity = '1';
+                        try {
+                            window.open = _0x5783b8;
+                        } catch (_0x5cd033) {}
+                        return;
+                    }
+                    if (_0x1537bd >= _0x50fa8c) {
+                        _0x1b02e6.textContent = "This is taking longer than usual, please contact bluenerf on discord if this error continues.";
+                        console.warn("Skipping " + _0x4107db + " after " + _0x1537bd + " failed attempts");
+                        if (_0x4acc83) {
+                            _0x4acc83();
+                        }
+                        return;
+                    }
+                    _0x153c53(_0x5b4d8e, _0xdfc047);
+                }
+            }
+        }
+        _0x153c53(_0x5b4d8e, _0xdfc047);
+    }
+    const _0x19c5cb = document.createElement("div");
+    const _0x77d3f2 = {
+        position: "fixed",
+        inset: '0',
+        width: "100%",
+        height: "100%",
+        background: "linear-gradient(135deg, #0a2342, #004d7a)",
+        zIndex: "2147483646",
+        margin: '0',
+        padding: '0',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        userSelect: "none",
+        opacity: '0',
+        transition: "opacity 0.5s ease-in-out"
+    };
+    Object.assign(_0x19c5cb.style, _0x77d3f2);
+    const _0x641784 = document.createElement("button");
+    _0x641784.textContent = '✕';
+    const _0x595400 = {
+        position: "fixed",
+        top: "12px",
+        right: "12px",
+        background: "rgba(0,0,0,0.65)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        color: "#ffffff",
+        fontSize: "20px",
+        lineHeight: '1',
+        cursor: "pointer",
+        display: "none",
+        zIndex: "2147483647",
+        padding: "6px 10px",
+        borderRadius: "6px",
+        boxShadow: "0 4px 18px rgba(0,0,0,0.5)",
+        backdropFilter: "blur(4px)",
+        opacity: '1',
+        transition: "opacity 0.25s ease"
+    };
+    Object.assign(_0x641784.style, _0x595400);
+    _0x641784.title = "Close";
+    _0x641784.addEventListener("click", () => {
+        console.log("User clicked close X");
+        _0x8b1d3();
+    });
+    document.body.appendChild(_0x19c5cb);
+    document.body.appendChild(_0x641784);
+    requestAnimationFrame(() => {
+        _0x19c5cb.style.opacity = '1';
+    });
+    const _0x544da9 = document.createElement('h1');
+    const _0x5bb3c3 = {
+        color: "#00ffd7",
+        fontSize: "5vw",
+        fontWeight: "900",
+        fontFamily: "monospace, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    };
+    _0x5bb3c3.margin = '0';
+    _0x5bb3c3.textShadow = "0 0 6px #00ffd7, 0 0 10px #00ffd7";
+    _0x5bb3c3.whiteSpace = "pre";
+    _0x5bb3c3.minWidth = "12ch";
+    _0x5bb3c3.textAlign = "center";
+    Object.assign(_0x544da9.style, _0x5bb3c3);
+    const _0x1b02e6 = document.createElement("div");
+    const _0x57783b = {
+        color: "#a0fff0",
+        fontSize: "2vw",
+        fontWeight: "600",
+        fontFamily: "system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        marginTop: "0.5em",
+        textShadow: "0 0 3px #00bba1"
+    };
+    Object.assign(_0x1b02e6.style, _0x57783b);
+    const _0x28649f = document.createElement("div");
+    const _0x4b2dd1 = {
+        marginTop: "2em",
+        pointerEvents: "auto"
+    };
+    Object.assign(_0x28649f.style, _0x4b2dd1);
+    const _0x19cbcb = document.createElement("button");
+    _0x19cbcb.textContent = "Goto Destination";
+    const _0x28d4ff = {
+        fontSize: "1.8vw",
+        padding: "0.5em 1.5em",
+        borderRadius: "6px",
+        border: "none",
+        backgroundColor: "#00ffd7",
+        color: "#004d7a",
+        fontWeight: "700",
+        cursor: "pointer",
+        boxShadow: "0 0 8px #00ffd7",
+        transition: "background-color 0.2s ease"
+    };
+    Object.assign(_0x19cbcb.style, _0x28d4ff);
+    _0x19cbcb.addEventListener("mouseenter", () => {
+        _0x19cbcb.style.backgroundColor = "#00bba1";
+    });
+    _0x19cbcb.addEventListener("mouseleave", () => {
+        _0x19cbcb.style.backgroundColor = "#00ffd7";
+    });
+    _0x19cbcb.style.display = "none";
+    _0x28649f.appendChild(_0x19cbcb);
+    const _0xdd3c1b = document.createElement("div");
+    const _0x74781b = {
+        width: "40vw",
+        maxWidth: "400px",
+        height: "8px",
+        backgroundColor: "rgba(0, 255, 215, 0.2)",
+        borderRadius: "4px",
+        marginTop: "2em",
+        overflow: "hidden"
+    };
+    Object.assign(_0xdd3c1b.style, _0x74781b);
+    const _0x3688c8 = document.createElement("div");
+    const _0xcc752 = {
+        width: '0%',
+        height: "100%",
+        backgroundColor: "#00ffd7",
+        borderRadius: "4px",
+        transition: "width 0.3s ease"
+    };
+    Object.assign(_0x3688c8.style, _0xcc752);
+    _0xdd3c1b.appendChild(_0x3688c8);
+    _0x19c5cb.appendChild(_0x544da9);
+    _0x19c5cb.appendChild(_0x1b02e6);
+    _0x19c5cb.appendChild(_0x28649f);
+    _0x19c5cb.appendChild(_0xdd3c1b);
+    const _0x3ce014 = document.createElement("div");
+    _0x3ce014.innerHTML = "\n This was created by <strong>BlueNerf</strong>, although I do this for free, I would really appreciate it if you \n <a href=\"https://www.youtube.com/@BlueNerf-d3x?sub_confirmation=1\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:#00ffd7; text-decoration: underline;\">\n subscribe\n </a>.\n ";
+    const _0xd7eae7 = {
+        color: "#88fff0",
+        fontSize: "1.5vw",
+        fontWeight: "600",
+        fontFamily: "system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+        marginTop: "3em",
+        textAlign: "center",
+        maxWidth: "80vw",
+        userSelect: "text"
+    };
+    Object.assign(_0x3ce014.style, _0xd7eae7);
+    _0x19c5cb.appendChild(_0x3ce014);
+    let _0x53aae0 = 0;
+
+    function _0x523fe0(_0xb856e) {
+        const _0x2e6c7e = '.'.repeat(_0xb856e);
+        const _0x5ac266 = " ".repeat(3 - _0xb856e);
+        return "Bypassing" + _0x2e6c7e + _0x5ac266;
+    }
+    _0x544da9.textContent = _0x523fe0(_0x53aae0);
+    const _0x400a8f = setInterval(() => {
+        _0x53aae0 = (_0x53aae0 + 1) % 4;
+        _0x544da9.textContent = _0x523fe0(_0x53aae0);
+    }, 1000);
+    async function _0x56f682() {
+        function _0x30f7d2() {
+            function _0x4458d6() {
+                return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, _0x25ed5b => {
+                    const _0x4c6c5b = Math.random() * 16 | 0;
+                    const _0x4755bd = _0x25ed5b === 'x' ? _0x4c6c5b : _0x4c6c5b & 3 | 8;
+                    return _0x4755bd.toString(16);
+                });
+            }
+            return "pdfeditor-" + _0x4458d6();
+        }
+        window.chrome = window.chrome || {};
+        chrome.runtime = chrome.runtime || {};
+        const _0x595a18 = chrome.runtime.sendMessage;
+        chrome.runtime.sendMessage = function(..._0x564f0b) {
+            console.log("[HOOKED] sendMessage called:", _0x564f0b);
+            if (typeof _0x564f0b[0] === "string" && _0x564f0b[1]?.["message"] === "wk_installed") {
+                console.log("[HOOKED] Spoofing wk_installed for", _0x564f0b[0]);
+                const _0x2666f4 = {
+                    success: true
+                };
+                _0x564f0b[2]?.(_0x2666f4);
+                return;
+            }
+            if (_0x564f0b[0]?.["type"] === "getFingerprint") {
+                console.log("[HOOKED] Spoofing getFingerprint");
+                _0x564f0b[1]?.(_0x30f7d2());
+                return;
+            }
+            if (_0x564f0b[0]?.["type"] === "getAdblockerStatus") {
+                console.log("[HOOKED] Spoofing getAdblockerStatus");
+                _0x564f0b[1]?.(false);
+                return;
+            }
+            if (_0x595a18) {
+                return _0x595a18.apply(this, _0x564f0b);
+            }
+            console.warn("[HOOKED] No original sendMessage to call");
+        };
+        const _0x3bfec0 = window.location.href;
+        const _0x3b93bb = btoa(_0x3bfec0);
+        let _0x171281 = localStorage.getItem("pdfeditor_fingerprint");
+        if (!_0x171281) {
+            _0x171281 = _0x30f7d2();
+            localStorage.setItem("pdfeditor_fingerprint", _0x171281);
+        }
+        const _0x47da42 = "https://pass.work.ink/redirect/" + encodeURIComponent(_0x3b93bb) + "?fingerprint=" + encodeURIComponent(_0x171281) + "&adblockerInstalled=" + 0 + "&base64=1&json=1";
+        try {
+            console.log("[Bypass] Fetching redirect from:", _0x47da42);
+            const _0x271ebc = await fetch(_0x47da42, {
+                'method': "GET",
+                'credentials': "omit"
+            });
+            if (!_0x271ebc.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const _0x5a70fd = await _0x271ebc.json();
+            console.log("[Bypass] Response:", _0x5a70fd);
+            if (!_0x5a70fd.noRedirect && _0x5a70fd.to) {
+                console.log("[Bypass] Redirecting to:", _0x5a70fd.to);
+                window.location.href = _0x5a70fd.to;
+            } else {
+                console.log("[Bypass] No redirect needed:", _0x5a70fd);
+            }
+        } catch (_0x4cfb55) {
+            console.error("[Bypass] Fetch error:", _0x4cfb55);
+        }
+    }
+    const _0x1ffa1a = {
+        selector: ".large.accessBtn.pos-relative.svelte-s4fbka",
+        delay: 0xfa
+    };
+    const _0xa3882a = {
+        selector: ".w-full.bg-gray-100.hover\\:bg-gray-200.active\\:bg-gray-300.text-gray-700.py-4.rounded-full.font-medium.transition-colors",
+        delay: 0xc8
+    };
+    const _0xd55531 = {
+        selector: ".large.accessBtn.pos-relative.svelte-s4fbka",
+        delay: 0xc8
+    };
+    const _0xb1809e = {
+        selector: "DO NOTHING"
+    };
+    _0xb1809e.delay = 0x0;
+    const _0x53c182 = {
+        selector: ".w-full.h-14.px-6.text-lg.font-semibold.rounded-full.transition-all.duration-200.flex.items-center.justify-center.space-x-3.bg-green-600.text-white.hover\\:bg-green-700.shadow-lg.hover\\:shadow-xl",
+        delay: 0x12c
+    };
+    const _0x42530b = {
+        selector: ".interestedBtn.button",
+        delay: 0xfa
+    };
+    const _0x162a32 = {
+        selector: "button.large.accessBtn",
+        "delay": 0x1f4
+    };
+    const _0x2d8082 = [_0x1ffa1a, _0xa3882a, _0xd55531, _0xb1809e, _0x53c182, _0x42530b, _0x162a32];
+    _0x1b02e6.textContent = "on step: 0";
+    _0x3688c8.style.width = '0%';
+
+    function _0xea6d68(_0x3a31d1) {
+        if (_0x5c9ec9) {
+            return;
+        }
+        if (_0x3a31d1 >= _0x2d8082.length) {
+            _0x1b02e6.textContent = "Completed!";
+            _0x3688c8.style.width = "100%";
+            _0x19cbcb.style.display = "none";
+            _0x28649f.style.pointerEvents = "none";
+            console.log("Chain complete.");
+            console.log("Showing close button");
+            _0x641784.style.display = "block";
+            _0x641784.style.opacity = '1';
+            return;
+        }
+        const _0x2f9385 = _0x2d8082[_0x3a31d1];
+        _0x1b02e6.textContent = "on step: " + _0x3a31d1;
+        _0x3688c8.style.width = _0x3a31d1 / (_0x2d8082.length - 1) * 100 + '%';
+        if (_0x3a31d1 === 3) {
+            _0x56f682().then(() => {
+                if (_0x5c9ec9) {
+                    return;
+                }
+                if (_0x2f9385.selector === "DO NOTHING") {
+                    _0xea6d68(_0x3a31d1 + 1);
+                } else {
+                    _0x2e6e49(_0x2f9385.selector, _0x2f9385.delay, () => {
+                        _0xea6d68(_0x3a31d1 + 1);
+                    });
+                }
+            })["catch"](_0x123079 => {
+                console.error("Error in redirect:", _0x123079);
+                if (_0x5c9ec9) {
+                    return;
+                }
+                if (_0x2f9385.selector === "DO NOTHING") {
+                    _0xea6d68(_0x3a31d1 + 1);
+                } else {
+                    _0x2e6e49(_0x2f9385.selector, _0x2f9385.delay, () => {
+                        _0xea6d68(_0x3a31d1 + 1);
+                    });
+                }
+            });
+            return;
+        }
+        if (_0x3a31d1 === 4) {
+            console.log("Green button not found — switching to .stepcont fallback clicker.");
+            _0x455128(() => {
+                if (_0x5c9ec9) {
+                    return;
+                }
+                _0xea6d68(_0x3a31d1 + 1);
+            });
+            return;
+        }
+        if (_0x3a31d1 === _0x2d8082.length - 1) {
+            _0x19cbcb.style.display = "inline-block";
+            _0x19cbcb.disabled = false;
+            _0x28649f.style.pointerEvents = "auto";
+            _0x19cbcb.onclick = () => {
+                _0x19cbcb.disabled = true;
+                _0x19cbcb.textContent = "Processing...";
+                document.querySelector("#access-offers").click();
+                _0x1b02e6.textContent = "Completed!";
+                _0x3688c8.style.width = "100%";
+                _0x19cbcb.style.display = "none";
+                _0x28649f.style.pointerEvents = "none";
+                console.log("Showing close button");
+                _0x641784.style.display = "block";
+                _0x641784.style.opacity = '1';
+            };
+            return;
+        }
+        _0x2e6e49(_0x2f9385.selector, _0x2f9385.delay, () => {
+            _0xea6d68(_0x3a31d1 + 1);
+        });
+    }
+    _0xea6d68(0);
+})();
