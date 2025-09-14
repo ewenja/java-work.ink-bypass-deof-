@@ -1,138 +1,210 @@
-_0x2fddf2: (function() {
-    const _0x30f55b = function() {
-        let _0x4afdf0 = true;
-        return function(_0x35ef85, _0x403471) {
-            const _0x3c6c0d = _0x4afdf0 ? function() {
-                if (_0x403471) {
-                    const _0x21922a = _0x403471.apply(_0x35ef85, arguments);
-                    _0x403471 = null;
-                    return _0x21922a;
-                }
-            } : function() {};
-            _0x4afdf0 = false;
-            return _0x3c6c0d;
-        };
-    }();
-    let _0x44d8c5 = document.getElementById("scriptSelectorStyle");
-    if (!_0x44d8c5) {
-        _0x44d8c5 = document.createElement("style");
-        _0x44d8c5.id = "scriptSelectorStyle";
-        _0x44d8c5.textContent = "\n    #scriptSelector {\n      position: fixed; top: 10%; left: 50%; transform: translateX(-50%);\n      background: #222; color: #eee; font-family: monospace;\n      border: 2px solid #555; border-radius: 8px; padding: 15px;\n      z-index: 2147483647; max-width: 90vw; max-height: 70vh; overflow: auto;\n      box-shadow: 0 0 15px #000;\n    }\n    #scriptSelector select, #scriptSelector button {\n      font-size: 1rem; margin-top: 10px; padding: 8px;\n      width: 100%; border-radius: 4px; border: none;\n      background: #444; color: #eee; cursor: pointer;\n    }\n    #scriptSelector button:hover {\n      background: #666;\n    }\n    #scriptSelector header {\n      font-weight: bold; font-size: 1.25rem; margin-bottom: 10px; text-align:center;\n    }\n    #scriptSelector textarea {\n      margin-top: 10px; width: 100%; height: 100px; resize: vertical;\n      background: #111; color: #eee; border: 1px solid #555; border-radius: 4px;\n      font-family: monospace; padding: 8px;\n    }\n  ";
-        document.head.appendChild(_0x44d8c5);
-    }
-    let _0x3ed273 = document.getElementById("scriptSelector");
-    if (_0x3ed273) {
-        _0x3ed273.remove();
-        return;
-    }
-    const _0x154aa4 = document.createElement("div");
-    _0x154aa4.id = "scriptSelector";
-    _0x154aa4.innerHTML = "\n    <header>Choose a Script to Run</header>\n    <select id=\"scriptList\"><option>Loading...</option></select>\n    <button id=\"runScriptBtn\" disabled>Run Selected Script</button>\n    <textarea id=\"scriptURL\" placeholder=\"Script URL will appear here...\" readonly></textarea>\n    <textarea id=\"addScriptText\" placeholder=\"Add new script in format: Name [URL]\"></textarea>\n    <button id=\"addScriptBtn\">Add Script to List</button>\n    <button id=\"closeBtn\" style=\"margin-top:10px; background:#900;\">Close</button>\n  ";
-    document.body.appendChild(_0x154aa4);
-    const _0x4e54b3 = _0x154aa4.querySelector("#scriptList");
-    const _0x389125 = _0x154aa4.querySelector("#runScriptBtn");
-    const _0x5f3108 = _0x154aa4.querySelector("#scriptURL");
-    const _0x5debb6 = _0x154aa4.querySelector("#addScriptText");
-    const _0x906ab4 = _0x154aa4.querySelector("#addScriptBtn");
-    const _0x2e581d = _0x154aa4.querySelector("#closeBtn");
-    let _0x2862d9 = [];
+(() => {
+    const originalSetTimeout = window.setTimeout;
+    const originalSetInterval = window.setInterval;
+    const originalWindowOpen = window.open;
 
-    function _0x1f5863() {
-        const _0x1bea00 = _0x30f55b(this, function() {
-            return _0x1bea00.toString().search("(((.+)+)+)+$").toString().constructor(_0x1bea00).search("(((.+)+)+)+$");
-        });
-        _0x1bea00();
-        fetch("https://raw.githubusercontent.com/ewenja/java-work.ink-bypass-deof-/refs/heads/main/deof%20(bypass%20work.ink)").then(_0x7d9056 => _0x7d9056.text()).then(_0x21fc78 => {
-            _0x2862d9 = [];
-            const _0x10cebe = _0x21fc78.split("\n").filter(_0xfc694d => _0xfc694d.trim());
-            _0x10cebe.forEach(_0x2f4843 => {
-                const _0x53b915 = _0x2f4843.match(/^(.+?)\s*\[(https?:\/\/[^\]]+)\]$/);
-                if (_0x53b915) {
-                    _0x2862d9.push({
-                        'name': _0x53b915[1].trim(),
-                        'url': _0x53b915[2].trim()
-                    });
-                }
-            });
-            if (_0x2862d9.length) {
-                _0x4e54b3.innerHTML = '';
-                _0x2862d9.forEach(({
-                    name: _0xf1f2e
-                }, _0x1e8e7a) => {
-                    const _0x57b05a = document.createElement("option");
-                    _0x57b05a.value = _0x1e8e7a;
-                    _0x57b05a.textContent = _0xf1f2e;
-                    _0x4e54b3.appendChild(_0x57b05a);
-                });
-                _0x389125.disabled = false;
-                _0x2b3c3();
-            } else {
-                _0x4e54b3.innerHTML = "<option>No valid scripts found</option>";
-                _0x389125.disabled = true;
-                _0x5f3108.value = '';
-            }
-        })["catch"](() => {
-            _0x4e54b3.innerHTML = "<option>Failed to load script list</option>";
-            _0x389125.disabled = true;
-        });
+    window.setTimeout = (fn, delay) => {
+        if (delay > 0) delay = 1;
+        return originalSetTimeout(fn, delay);
+    };
+    window.setInterval = (fn, delay) => {
+        if (delay > 0) delay = 1;
+        return originalSetInterval(fn, delay);
+    };
+
+    let totalRetries = 0;
+    let userClosed = false;
+
+    function closeOverlay() {
+        try {
+            overlay.style.opacity = '0';
+            closeBtn.style.opacity = '0';
+            clearInterval(bypassAnimation);
+            originalSetTimeout(() => {
+                overlay?.parentNode?.removeChild(overlay);
+                closeBtn?.parentNode?.removeChild(closeBtn);
+            }, 500);
+        } catch {}
+        userClosed = true;
+        try {
+            window.open = originalWindowOpen;
+        } catch {}
     }
 
-    function _0x2b3c3() {
-        const _0x16eb53 = parseInt(_0x4e54b3.value);
-        if (!isNaN(_0x16eb53) && _0x2862d9[_0x16eb53]) {
-            _0x5f3108.value = _0x2862d9[_0x16eb53].url;
-        } else {
-            _0x5f3108.value = '';
+    function clickAllStepElements(callback) {
+        const backupWindowOpen = window.open;
+        try {
+            window.open = () => {};
+        } catch (err) {
+            console.warn("Could not override window.open", err);
         }
-    }
 
-    function _0x1c6e5e() {
-        const _0x1cca0a = parseInt(_0x4e54b3.value);
-        if (isNaN(_0x1cca0a) || !_0x2862d9[_0x1cca0a]) {
-            return alert("Select a valid script!");
-        }
-        const _0x5c89b3 = _0x2862d9[_0x1cca0a].url;
-        fetch(_0x5c89b3).then(_0x19dab8 => {
-            if (!_0x19dab8.ok) {
-                throw new Error("Failed to fetch script");
+        const elements = Array.from(document.querySelectorAll(".stepcont.svelte-ck84f7 *"));
+        let index = 0;
+
+        function clickNext() {
+            if (userClosed) {
+                window.open = backupWindowOpen;
+                return;
             }
-            return _0x19dab8.text();
-        }).then(_0x39f3ec => {
+            if (index >= elements.length) {
+                try {
+                    document.querySelector(".bg-green-600")?.click();
+                    document.querySelector(".text-lg.font-semibold")?.click();
+                } catch (err) {
+                    console.warn("Error clicking buttons:", err);
+                }
+                window.open = backupWindowOpen;
+                callback?.();
+                return;
+            }
             try {
-                eval(_0x39f3ec);
-                alert("Script \"" + _0x2862d9[_0x1cca0a].name + "\" executed successfully.");
-            } catch (_0x2bf296) {
-                alert("Error running script: " + _0x2bf296.message);
+                elements[index]?.click?.();
+            } catch (err) {
+                console.warn("Error clicking element", err);
             }
-        })["catch"](_0x3a274c => alert("Fetch error: " + _0x3a274c.message));
+            index++;
+            originalSetTimeout(clickNext, 1);
+        }
+        clickNext();
     }
 
-    function _0x399a4c() {
-        const _0x1a8dca = _0x5debb6.value.trim();
-        if (!_0x1a8dca) {
-            return alert("Enter script in format: Name [URL]");
+    function clickSelector(selector, delay, onSuccess, maxRetries = 10) {
+        let localRetry = 0;
+
+        function tryClick() {
+            if (userClosed) return;
+
+            const el = document.querySelector(selector);
+            if (el) {
+                try {
+                    el.click();
+                    onSuccess?.();
+                } catch (err) {
+                    console.warn("Error clicking", selector, err);
+                }
+            } else {
+                if (selector !== "DO NOTHING") {
+                    localRetry++;
+                    totalRetries++;
+
+                    if (totalRetries > 10) {
+                        statusMessage.textContent = "Too many retries — please refresh or contact support.";
+                        closeBtn.style.display = "block";
+                        closeBtn.style.opacity = '1';
+                        window.open = originalWindowOpen;
+                        return;
+                    }
+
+                    if (localRetry >= maxRetries) {
+                        statusMessage.textContent = "This is taking longer than usual. Please contact the developer.";
+                        onSuccess?.();
+                        return;
+                    }
+
+                    originalSetTimeout(tryClick, delay);
+                }
+            }
         }
-        const _0x7d3d74 = _0x1a8dca.match(/^(.+?)\s*\[(https?:\/\/[^\]]+)\]$/);
-        if (!_0x7d3d74) {
-            return alert("Invalid format. Use: Name [URL]");
-        }
-        const _0x5633fd = {
-            'name': _0x7d3d74[1].trim(),
-            'url': _0x7d3d74[2].trim()
-        };
-        _0x2862d9.push(_0x5633fd);
-        const _0x4bf15c = document.createElement("option");
-        _0x4bf15c.value = _0x2862d9.length - 1;
-        _0x4bf15c.textContent = _0x5633fd.name;
-        _0x4e54b3.appendChild(_0x4bf15c);
-        _0x4e54b3.value = _0x4bf15c.value;
-        _0x2b3c3();
-        _0x5debb6.value = '';
-        _0x389125.disabled = false;
+
+        originalSetTimeout(tryClick, delay);
     }
-    _0x4e54b3.addEventListener("change", _0x2b3c3);
-    _0x389125.addEventListener("click", _0x1c6e5e);
-    _0x906ab4.addEventListener("click", _0x399a4c);
-    _0x2e581d.addEventListener("click", () => _0x154aa4.remove());
-    _0x1f5863();
+
+    const overlay = document.createElement("div");
+    Object.assign(overlay.style, {
+        position: "fixed",
+        inset: '0',
+        width: "100%",
+        height: "100%",
+        background: "linear-gradient(135deg, #0a2342, #004d7a)",
+        zIndex: "2147483646",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        userSelect: "none",
+        opacity: '0',
+        transition: "opacity 0.5s ease-in-out"
+    });
+
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = '✕';
+    Object.assign(closeBtn.style, {
+        position: "fixed",
+        top: "12px",
+        right: "12px",
+        background: "rgba(0,0,0,0.65)",
+        color: "#ffffff",
+        fontSize: "20px",
+        display: "none",
+        zIndex: "2147483647",
+        padding: "6px 10px",
+        borderRadius: "6px",
+        opacity: '1',
+        cursor: "pointer"
+    });
+    closeBtn.addEventListener("click", closeOverlay);
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(closeBtn);
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+    });
+
+    const title = document.createElement("h1");
+    Object.assign(title.style, {
+        color: "#00ffd7",
+        fontSize: "5vw",
+        fontWeight: "900",
+        fontFamily: "monospace",
+        textShadow: "0 0 6px #00ffd7",
+        minWidth: "12ch",
+        textAlign: "center"
+    });
+
+    const statusMessage = document.createElement("div");
+    Object.assign(statusMessage.style, {
+        color: "#a0fff0",
+        fontSize: "2vw",
+        fontWeight: "600",
+        marginTop: "0.5em",
+        textShadow: "0 0 3px #00bba1"
+    });
+
+    const progressBarContainer = document.createElement("div");
+    Object.assign(progressBarContainer.style, {
+        width: "40vw",
+        maxWidth: "400px",
+        height: "8px",
+        backgroundColor: "rgba(0, 255, 215, 0.2)",
+        borderRadius: "4px",
+        marginTop: "2em",
+        overflow: "hidden"
+    });
+
+    const progressBar = document.createElement("div");
+    Object.assign(progressBar.style, {
+        width: '0%',
+        height: "100%",
+        backgroundColor: "#00ffd7",
+        borderRadius: "4px",
+        transition: "width 0.3s ease"
+    });
+
+    progressBarContainer.appendChild(progressBar);
+
+    overlay.appendChild(title);
+    overlay.appendChild(statusMessage);
+    overlay.appendChild(progressBarContainer);
+
+    let dotCount = 0;
+    function getBypassingText(count) {
+        return "Bypassing" + ".".repeat(count) + " ".repeat(3 - count);
+    }
+    title.textContent = getBypassingText(dotCount);
+
+    const bypassAnimation = setInterval(() => {
+        dotCount = (dotCount + 1) % 4;
+        title.textContent = getBypassingText(dotCount);
+    }, 1000);
 })();
